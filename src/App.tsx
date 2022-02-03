@@ -9,8 +9,8 @@ export default function App() {
   return (
     <AnswersHeadlessProvider {...answersHeadlessConfig}>
       <PageViewContextProvider >
-        <div className='flex justify-center px-4 py-6'>
-          <div className='w-full max-w-5xl'>
+        <div className='flex justify-center mx-4 px-4 py-6'>
+          <div className='w-full max-w-8xl'>
             <PageRouter
               Layout={StandardLayout}
               routes={routeConfig}
