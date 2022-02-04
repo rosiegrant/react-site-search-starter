@@ -18,7 +18,7 @@ interface CheckBoxOptionProps {
 
 const builtInCssClasses: CheckboxOptionCssClasses = {
   option: 'flex items-center space-x-3',
-  optionInput: 'w-3.5 h-3.5 form-checkbox cursor-pointer border border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500',
+  optionInput: 'w-3.5 h-3.5 form-checkbox cursor-pointer border border-gray-300 rounded-sm text-green-900 focus:ring-green-900',
   optionLabel: 'text-gray-500 text-sm font-normal cursor-pointer'
 }
 

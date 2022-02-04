@@ -14,6 +14,7 @@ import { Divider } from '../components/StaticFilters';
 import ViewFiltersButton from '../components/ViewFiltersButton';
 import { useContext } from 'react';
 import { PageView, PageViewContext } from '../context/PageViewContext';
+import { ParksCard } from '../components/cards/ParksCard';
 
 const filterSearchFields = [{
   fieldApiName: 'name',
@@ -77,7 +78,7 @@ export default function LocationsPage({ verticalKey }: {
             ]}
           /> */}
           <VerticalResults
-            CardComponent={StandardCard}
+            CardComponent={ParksCard}
           />
           <LocationBias />
         </div>

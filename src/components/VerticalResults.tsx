@@ -35,8 +35,9 @@ export function VerticalResultsDisplay(props: VerticalResultsDisplayProps): JSX.
     return null;
   }
 
-  const resultsClassNames = classNames({
+  const resultsClassNames = classNames("grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-4", {
     [cssClasses.results___loading ?? '']: isLoading
+    
   });
 
   return (
@@ -106,7 +107,7 @@ interface PaginationCssClasses {
 }
 
 const builtInPaginationCssClasses: PaginationCssClasses = {
-  container: 'flex justify-center mb-4',
+  container: 'flex justify-center mb-4 mt-4',
   labelContainer: 'inline-flex shadow-sm -space-x-px',
   label: 'z-0 inline-flex items-center px-4 py-2 text-sm font-semibold border border-gray-300 text-gray-500',
   selectedLabel: 'z-10 inline-flex items-center px-4 py-2 text-sm font-semibold border border-blue-600 text-blue-600 bg-blue-50',

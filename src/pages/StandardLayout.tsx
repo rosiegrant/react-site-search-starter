@@ -4,7 +4,7 @@ import { universalResultsConfig } from '../config/universalResultsConfig';
 import { LayoutComponent } from '../PageRouter';
 import SearchBar from '../components/SearchBar';
 import SampleVisualSearchBar from '../components/VisualAutocomplete/SampleVisualSearchBar';
-import { Header } from '../components/header';
+import Header from '../components/header';
 
 const navLinks = [
   {
@@ -31,7 +31,6 @@ const StandardLayout: LayoutComponent = ({ page }) => {
         : <SampleVisualSearchBar />
       } */}
       {/* <Navigation links={navLinks} /> */}
-      <Header></Header>
       {page}
     </>
   )
