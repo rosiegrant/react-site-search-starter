@@ -107,7 +107,7 @@ export default function FilterSearch ({
         placeholder='Search here ...'
         screenReaderInstructions={SCREENREADER_INSTRUCTIONS}
         screenReaderText={screenReaderText}
-        onlyAllowDropdownOptionSubmissions={true}
+        onlyAllowDropdownOptionSubmissions={false}
         onInputChange={newInput => {
           setInput(newInput);
         }}
@@ -115,6 +115,7 @@ export default function FilterSearch ({
           executeFilterSearch(input);
         }}
         cssClasses={cssClasses}
+        firstOption={sections[0]?.results[0]}
       >
         {sections.map((section, sectionIndex) => {
           const sectionId = section.label ? `${section.label}-${sectionIndex}` : `${sectionIndex}`;

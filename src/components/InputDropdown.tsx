@@ -5,6 +5,12 @@ import ScreenReader from "./ScreenReader";
 import recursivelyMapChildren from './utils/recursivelyMapChildren';
 import { v4 as uuid } from 'uuid';
 
+export interface Option {
+  value: string,
+  onSelect: () => void,
+  display: JSX.Element
+}
+
 export interface InputDropdownCssClasses {
   inputDropdownContainer?: string,
   inputDropdownContainer___active?: string,
@@ -29,7 +35,8 @@ interface Props {
   onInputChange: (value: string) => void,
   onInputFocus: (value: string) => void,
   onDropdownLeave?: (value: string) => void,
-  cssClasses?: InputDropdownCssClasses
+  cssClasses?: InputDropdownCssClasses,
+  firstOption?: Option
 }
 
 interface State {
@@ -70,7 +77,8 @@ export default function InputDropdown({
   onInputChange,
   onInputFocus,
   onDropdownLeave,
-  cssClasses = {}
+  cssClasses = {},
+  firstOption
 }: React.PropsWithChildren<Props>): JSX.Element | null {
   const [{
     focusedSectionIndex,
@@ -197,8 +205,13 @@ export default function InputDropdown({
       && focusedSectionIndex === undefined
       && !onlyAllowDropdownOptionSubmissions
     ) {
-      setLatestUserInput(inputValue);
-      onSubmit(inputValue);
+      console.log("hello")
+      if(firstOption) {
+        console.log(firstOption.value)
+        setLatestUserInput(firstOption.value);
+        onSubmit(firstOption.value);
+        firstOption.onSelect();
+      }
       dispatch({ type: 'HideSections' });
     }
   }
