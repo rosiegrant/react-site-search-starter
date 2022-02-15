@@ -1,6 +1,5 @@
 import { CompositionMethod, useComposedCssClasses } from '../../hooks/useComposedCssClasses';
 import { CardProps } from '../../models/cardComponent';
-import { provideAnalytics } from '@yext/answers-analytics';
 
 export interface StandardCardConfig {
   showOrdinal?: boolean
@@ -52,21 +51,7 @@ function isCtaData(data: unknown): data is CtaData {
   });
 }
 
-const analytics = provideAnalytics({
-  experienceKey: 'slanswers',
-  experienceVersion: 'PRODUCTION',
-  businessId: 3350634,
-});
 
-export function fireAnalyticsEvent() {
-  analytics.report({
-    type: "CTA_CLICK",
-    entityId: '1',
-    verticalKey: 'people',
-    searcher: 'VERTICAL',
-    queryId: '95751527-9db6-4859-8278-60d1c060b6c0'
-  });
-}
 
 /**
  * This Component renders the base result card.
@@ -90,7 +75,7 @@ export function StandardCard(props: StandardCardProps): JSX.Element {
         </div>
       } */}
       <div className={cssClasses.ctaContainer}>
-        <button className={cssClasses.cta1} onClick={fireAnalyticsEvent}>Visit</button>
+        <button className={cssClasses.cta1}>Visit</button>
       </div>
 
     </>);
