@@ -23,6 +23,7 @@ const builtInCssClasses: FilterSearchCssClasses = {
   sectionLabel: 'text-sm text-gray-700 font-semibold pb-2',
   focusedOption: 'bg-gray-100',
   option: 'text-sm text-gray-700 pb-1 cursor-pointer',
+  inputDropdownContainer: 'relative'
 }
 
 export interface FilterSearchProps {
