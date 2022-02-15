@@ -19,6 +19,10 @@ import { ParksCard } from '../components/cards/ParksCard';
 const filterSearchFields = [{
   fieldApiName: 'name',
   entityType: 'location'
+},
+{
+  fieldApiName: 'builtin.location',
+  entityType: 'location'
 }
 // , {
 //   fieldApiName: 'paymentOptions',
@@ -37,17 +41,17 @@ export default function LocationsPage({ verticalKey }: {
 
   return (
     <div className='flex'> 
-      <FilterDisplayManager>
-        <FilterSearch
+      {/* <FilterDisplayManager> */}
+        {/* <FilterSearch
           label='Filter Search'
           sectioned={true}
           searchFields={filterSearchFields}
           customCssClasses={{
             container: 'md:w-80',
             dropdownContainer: 'relative z-10 shadow-lg rounded-md border border-gray-300 bg-white pt-3 pb-1 px-4 mt-1'
-          }}/>
-        <Divider />
-        <Facets
+          }}/> */}
+        {/* <Divider /> */}
+        {/* <Facets
           searchOnChange={true}
           searchable={true}
           collapsible={true}
@@ -55,10 +59,18 @@ export default function LocationsPage({ verticalKey }: {
           customCssClasses={{
             container: 'md:w-80'
           }}
-          />
-      </FilterDisplayManager>
+          /> */}
+      {/* </FilterDisplayManager> */}
       { (pageView === PageView.Desktop || pageView === PageView.FiltersHiddenMobile) &&
         <div className='flex-grow'>
+          <FilterSearch
+          label=''
+          sectioned={true}
+          searchFields={filterSearchFields}
+          customCssClasses={{
+            container: 'md:w-100',
+            dropdownContainer: 'w-full absolute z-10 shadow-lg rounded-md border border-gray-300 bg-white pt-3 pb-1 px-4 mt-1'
+          }}/>
           <DirectAnswer />
           <SpellCheck />
           <div className='flex'>
