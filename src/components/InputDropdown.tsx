@@ -137,7 +137,7 @@ export default function InputDropdown({
       return React.cloneElement(child, {
         onLeaveSectionFocus,
         options: modifiedOptions,
-        isFocused: false,
+        isFocused: true,
         key: `${currentSectionIndex}-${childrenKey}`
       });
     }

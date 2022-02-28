@@ -17,12 +17,12 @@ interface FilterSearchCssClasses extends InputDropdownCssClasses, DropdownSectio
 const builtInCssClasses: FilterSearchCssClasses = {
   container: 'mb-2',
   label: 'mb-4 text-sm font-medium text-gray-900',
-  dropdownContainer: 'absolute z-10 shadow-lg rounded-md border border-gray-300 bg-white pt-3 pb-1 px-4 mt-1',
+  dropdownContainer: 'absolute z-10 shadow-lg rounded-md border border-gray-300 bg-white pt-3 pb-1 mt-1',
   inputElement: 'text-sm bg-white outline-none h-9 w-full p-2 rounded-md border border-gray-300 focus:border-green-900',
   sectionContainer: 'pb-2',
   sectionLabel: 'text-sm text-gray-700 font-semibold pb-2',
   focusedOption: 'bg-gray-100',
-  option: 'text-sm text-gray-700 pb-1 cursor-pointer',
+  option: 'text-sm text-gray-700 pb-1 cursor-pointer px-4',
   inputDropdownContainer: 'relative'
 }
 
@@ -34,7 +34,7 @@ export interface FilterSearchProps {
   cssCompositionMethod?: CompositionMethod
 }
 
-export default function FilterSearch ({
+export default function FilterSearch({
   label,
   sectioned,
   searchFields,
@@ -43,7 +43,7 @@ export default function FilterSearch ({
 }: FilterSearchProps): JSX.Element {
   const answersActions = useAnswersActions();
   const [input, setInput] = useState('');
-  const selectedFilterOptionRef = useRef<Filter|null>(null);
+  const selectedFilterOptionRef = useRef<Filter | null>(null);
   const searchParamFields = searchFields.map((searchField) => {
     return { ...searchField, fetchEntities: false }
   });
@@ -88,7 +88,7 @@ export default function FilterSearch ({
   });
   if (sections.length > 0) {
     const screenReaderPhrases = sections.map(section => {
-      const optionInfo = section.label 
+      const optionInfo = section.label
         ? `${section.results.length} ${section.label}`
         : `${section.results.length}`;
       return processTranslation({

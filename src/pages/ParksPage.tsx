@@ -19,14 +19,15 @@ import Mapbox from '../components/Mapbox';
 import { useAnswersState } from '@yext/answers-headless-react';
 import { Result, Direction, SortType, VerticalResults as VR } from '@yext/answers-core';
 
-const filterSearchFields = [{
-  fieldApiName: 'name',
-  entityType: 'location'
-},
-{
-  fieldApiName: 'builtin.location',
-  entityType: 'location'
-}
+const filterSearchFields = [
+  //   {
+  //   fieldApiName: 'name',
+  //   entityType: 'location'
+  // },
+  {
+    fieldApiName: 'builtin.location',
+    entityType: 'location'
+  }
   // , {
   //   fieldApiName: 'paymentOptions',
   //   entityType: 'location'
@@ -111,11 +112,11 @@ export default function LocationsPage({ verticalKey }: {
         <div className='flex-grow'>
           <FilterSearch
             label=''
-            sectioned={true}
+            sectioned={false}
             searchFields={filterSearchFields}
             customCssClasses={{
               container: 'md:w-100',
-              dropdownContainer: 'w-full absolute z-10 shadow-lg rounded-md border border-gray-300 bg-white pt-3 pb-1 px-4 mt-1'
+              dropdownContainer: 'w-full absolute z-10 shadow-lg rounded-md border border-gray-300 bg-white pt-3 pb-1 mt-1'
             }} />
           <DirectAnswer />
           <SpellCheck />
