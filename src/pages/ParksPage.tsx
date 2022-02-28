@@ -15,6 +15,9 @@ import ViewFiltersButton from '../components/ViewFiltersButton';
 import { useContext } from 'react';
 import { PageView, PageViewContext } from '../context/PageViewContext';
 import { ParksCard } from '../components/cards/ParksCard';
+import Mapbox from '../components/Mapbox';
+import { useAnswersState } from '@yext/answers-headless-react';
+import { Result, Direction, SortType, VerticalResults as VR } from '@yext/answers-core';
 
 const filterSearchFields = [{
   fieldApiName: 'name',
@@ -33,24 +36,48 @@ const filterSearchFields = [{
   // }
 ];
 
+interface GeoData {
+  yextDisplayCoordinate: {
+    latitude: number;
+    longitude: number;
+  };
+}
+
 export default function LocationsPage({ verticalKey }: {
   verticalKey: string
 }) {
   const { pageView } = useContext(PageViewContext);
   usePageSetupEffect(verticalKey);
 
+  const emptyResults: Result[] = [];
+  const results = useAnswersState(state => state.vertical.results) || [];
+  const allResultsForVertical = useAnswersState(state => state.vertical?.noResults?.allResultsForVertical.results) || [];
+
+  function renderMap(): JSX.Element | null {
+    if (results.length === 0 && allResultsForVertical.length === 0) return null;
+
+    const resultsToDisplay = results.length === 0
+      ? allResultsForVertical
+      : results
+
+    const geoResults = resultsToDisplay.map(r => r.rawData as unknown as GeoData)
+
+    return (
+      <div className="VerticalSearch-map">
+        <Mapbox
+          markers={geoResults.map((r, i) => ({
+            coord: [r.yextDisplayCoordinate?.longitude || 0, r.yextDisplayCoordinate?.latitude || 0],
+            url: resultsToDisplay[i].link,
+          }))}
+        />
+      </div>
+    )
+  }
+
+
   return (
     <div className='flex'>
-      <FilterDisplayManager>
-        {/* <FilterSearch
-          label='Filter Search'
-          sectioned={true}
-          searchFields={filterSearchFields}
-          customCssClasses={{
-            container: 'md:w-80',
-            dropdownContainer: 'relative z-10 shadow-lg rounded-md border border-gray-300 bg-white pt-3 pb-1 px-4 mt-1'
-          }}/> */}
-        {/* <Divider /> */}
+      {/* <FilterDisplayManager>
         <StaticFilters filterConfig={[
           {
             options: [
@@ -80,7 +107,7 @@ export default function LocationsPage({ verticalKey }: {
             container: 'md:w-80'
           }}
         />
-      </FilterDisplayManager>
+      </FilterDisplayManager> */}
       {(pageView === PageView.Desktop || pageView === PageView.FiltersHiddenMobile) &&
         <div className='flex-grow'>
           <FilterSearch
@@ -109,6 +136,7 @@ export default function LocationsPage({ verticalKey }: {
               { label: 'Events', verticalKey: 'events' }
             ]}
           /> */}
+          {renderMap()}
           <VerticalResults
             CardComponent={ParksCard}
             displayAllOnNoResults={false}
