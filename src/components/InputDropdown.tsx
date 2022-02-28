@@ -71,7 +71,7 @@ export default function InputDropdown({
   onlyAllowDropdownOptionSubmissions,
   forceHideDropdown,
   children,
-  onSubmit = () => {},
+  onSubmit = () => { },
   renderSearchButton = () => null,
   renderLogo = () => null,
   onInputChange,
@@ -115,7 +115,7 @@ export default function InputDropdown({
       const modifiedOnSelect = () => {
         setLatestUserInput(option.value);
         dispatch({ type: 'HideSections' });
-        option.onSelect?.(); 
+        option.onSelect?.();
       }
       return { ...option, onSelect: modifiedOnSelect }
     });
@@ -201,12 +201,12 @@ export default function InputDropdown({
       evt.preventDefault();
     }
 
-    if (evt.key === 'Enter' 
+    if (evt.key === 'Enter'
       && focusedSectionIndex === undefined
       && !onlyAllowDropdownOptionSubmissions
     ) {
       console.log("hello")
-      if(firstOption) {
+      if (firstOption) {
         console.log(firstOption.value)
         setLatestUserInput(firstOption.value);
         onSubmit(firstOption.value);

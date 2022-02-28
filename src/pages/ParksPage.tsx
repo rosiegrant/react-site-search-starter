@@ -10,7 +10,7 @@ import usePageSetupEffect from '../hooks/usePageSetupEffect';
 import FilterDisplayManager from '../components/FilterDisplayManager';
 import Facets from '../components/Facets';
 import FilterSearch from '../components/FilterSearch';
-import { Divider } from '../components/StaticFilters';
+import StaticFilters, { Divider } from '../components/StaticFilters';
 import ViewFiltersButton from '../components/ViewFiltersButton';
 import { useContext } from 'react';
 import { PageView, PageViewContext } from '../context/PageViewContext';
@@ -24,13 +24,13 @@ const filterSearchFields = [{
   fieldApiName: 'builtin.location',
   entityType: 'location'
 }
-// , {
-//   fieldApiName: 'paymentOptions',
-//   entityType: 'location'
-// }, {
-//   fieldApiName: 'services',
-//   entityType: 'location'
-// }
+  // , {
+  //   fieldApiName: 'paymentOptions',
+  //   entityType: 'location'
+  // }, {
+  //   fieldApiName: 'services',
+  //   entityType: 'location'
+  // }
 ];
 
 export default function LocationsPage({ verticalKey }: {
@@ -40,8 +40,8 @@ export default function LocationsPage({ verticalKey }: {
   usePageSetupEffect(verticalKey);
 
   return (
-    <div className='flex'> 
-      {/* <FilterDisplayManager> */}
+    <div className='flex'>
+      <FilterDisplayManager>
         {/* <FilterSearch
           label='Filter Search'
           sectioned={true}
@@ -51,31 +51,51 @@ export default function LocationsPage({ verticalKey }: {
             dropdownContainer: 'relative z-10 shadow-lg rounded-md border border-gray-300 bg-white pt-3 pb-1 px-4 mt-1'
           }}/> */}
         {/* <Divider /> */}
-        {/* <Facets
+        <StaticFilters filterConfig={[
+          {
+            options: [
+              {
+                fieldId: "fullyVaccinatedStaff",
+                value: true,
+                label: "Vaccinated"
+              },
+              {
+                fieldId: "fullyVaccinatedStaff",
+                value: false,
+                label: "Not Vaccinated"
+              },
+            ]
+            ,
+            title: "Vaccination Status"
+          }
+        ]}
+        />
+        <Divider />
+        <Facets
           searchOnChange={true}
           searchable={true}
-          collapsible={true}
+          collapsible={false}
           defaultExpanded={true}
           customCssClasses={{
             container: 'md:w-80'
           }}
-          /> */}
-      {/* </FilterDisplayManager> */}
-      { (pageView === PageView.Desktop || pageView === PageView.FiltersHiddenMobile) &&
+        />
+      </FilterDisplayManager>
+      {(pageView === PageView.Desktop || pageView === PageView.FiltersHiddenMobile) &&
         <div className='flex-grow'>
           <FilterSearch
-          label=''
-          sectioned={true}
-          searchFields={filterSearchFields}
-          customCssClasses={{
-            container: 'md:w-100',
-            dropdownContainer: 'w-full absolute z-10 shadow-lg rounded-md border border-gray-300 bg-white pt-3 pb-1 px-4 mt-1'
-          }}/>
+            label=''
+            sectioned={true}
+            searchFields={filterSearchFields}
+            customCssClasses={{
+              container: 'md:w-100',
+              dropdownContainer: 'w-full absolute z-10 shadow-lg rounded-md border border-gray-300 bg-white pt-3 pb-1 px-4 mt-1'
+            }} />
           <DirectAnswer />
           <SpellCheck />
           <div className='flex'>
             <ResultsCount />
-            {pageView === PageView.FiltersHiddenMobile && 
+            {pageView === PageView.FiltersHiddenMobile &&
               <ViewFiltersButton />}
           </div>
           <AppliedFilters
@@ -91,6 +111,7 @@ export default function LocationsPage({ verticalKey }: {
           /> */}
           <VerticalResults
             CardComponent={ParksCard}
+            displayAllOnNoResults={false}
           />
           <LocationBias />
         </div>

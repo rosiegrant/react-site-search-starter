@@ -5,7 +5,7 @@ import renderCheckboxOption, { CheckboxOptionCssClasses } from './utils/renderCh
 
 interface FilterOption {
   fieldId: string,
-  value: string,
+  value: string | boolean,
   label: string
 }
 
@@ -36,7 +36,7 @@ export default function StaticFilters(props: StaticFiltersProps): JSX.Element {
   const { filterConfig, customCssClasses, cssCompositionMethod } = props;
   const cssClasses = useComposedCssClasses(builtInCssClasses, customCssClasses, cssCompositionMethod);
 
-  const selectableFilters = useAnswersState(state =>  state.filters.static);
+  const selectableFilters = useAnswersState(state => state.filters.static);
   const getOptionSelectStatus = (option: FilterOption): boolean => {
     const foundFilter = selectableFilters?.find(storedSelectableFilter => {
       const { selected, ...storedFilter } = storedSelectableFilter;
@@ -45,13 +45,13 @@ export default function StaticFilters(props: StaticFiltersProps): JSX.Element {
         matcher: Matcher.Equals,
         value: option.value
       };
-      return isDuplicateFilter(storedFilter, targetFilter); 
+      return isDuplicateFilter(storedFilter, targetFilter);
     });
     return !!foundFilter && foundFilter.selected;
   };
 
   const handleFilterOptionChange = (option: Filter, isChecked: boolean) => {
-    answersActions.resetFacets();
+    //answersActions.resetFacets();
     answersActions.setFilterOption({ ...option, selected: isChecked });
     answersActions.executeVerticalQuery();
   }
@@ -77,7 +77,7 @@ export default function StaticFilters(props: StaticFiltersProps): JSX.Element {
             }
             )}
           </div>
-          {!isLastFilterSet && <Divider customCssClasses={{ divider: cssClasses.divider }}/>}
+          {!isLastFilterSet && <Divider customCssClasses={{ divider: cssClasses.divider }} />}
         </fieldset>
       })}
     </div>

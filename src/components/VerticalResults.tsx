@@ -31,14 +31,19 @@ export function VerticalResultsDisplay(props: VerticalResultsDisplayProps): JSX.
   const { CardComponent, results, cardConfig = {}, isLoading = false, customCssClasses, cssCompositionMethod } = props;
   const cssClasses = useComposedCssClasses(builtInCssClasses, customCssClasses, cssCompositionMethod);
 
-  if (results.length === 0) {
-    return null;
-  }
-
   const resultsClassNames = classNames("grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-4", {
     [cssClasses.results___loading ?? '']: isLoading
-    
+
   });
+  if (results.length === 0) {
+    return (
+      <div className={resultsClassNames}>
+        No results :(
+      </div>
+    );
+  }
+
+
 
   return (
     <div className={resultsClassNames}>
@@ -55,7 +60,7 @@ export function VerticalResultsDisplay(props: VerticalResultsDisplayProps): JSX.
  * @param result - The result to render.
  */
 function renderResult(CardComponent: CardComponent, cardConfig: CardConfigTypes, result: Result): JSX.Element {
-  return <CardComponent result={result} configuration={cardConfig} key={result.id || result.index}/>;
+  return <CardComponent result={result} configuration={cardConfig} key={result.id || result.index} />;
 }
 
 interface VerticalResultsProps {
@@ -84,9 +89,9 @@ export default function VerticalResults(props: VerticalResultsProps): JSX.Elemen
 
   return (
     <>
-      <VerticalResultsDisplay results={results} isLoading={isLoading} {...otherProps}/>
-      {allowPagination 
-        && <Pagination 
+      <VerticalResultsDisplay results={results} isLoading={isLoading} {...otherProps} />
+      {allowPagination
+        && <Pagination
           numResults={resultsCount}
           customCssClasses={otherProps.customCssClasses}
           cssCompositionMethod={otherProps.cssCompositionMethod}
@@ -157,7 +162,7 @@ function Pagination(props: PaginationProps): JSX.Element | null {
           className={cssClasses.leftIconContainer}
           onClick={() => executeSearchWithNewOffset(offset - limit)} disabled={pageNumber === 1}
         >
-          <PageNavigationIcon className={cssClasses.icon + ' transform -rotate-90'}/>
+          <PageNavigationIcon className={cssClasses.icon + ' transform -rotate-90'} />
         </button>
         {paginationLabels.map((label, index) => {
           switch (label) {
@@ -174,7 +179,7 @@ function Pagination(props: PaginationProps): JSX.Element | null {
           className={cssClasses.rightIconContainer}
           onClick={() => executeSearchWithNewOffset(offset + limit)} disabled={pageNumber === maxPageCount}
         >
-          <PageNavigationIcon className={cssClasses.icon + ' transform rotate-90'}/>
+          <PageNavigationIcon className={cssClasses.icon + ' transform rotate-90'} />
         </button>
       </nav>
     </div>
