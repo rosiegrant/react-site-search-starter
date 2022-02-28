@@ -29,8 +29,8 @@ export default function DropdownSection({
   isFocused = false,
   options,
   optionIdPrefix,
-  onFocusChange = () => {},
-  onLeaveSectionFocus = () => {},
+  onFocusChange = () => { },
+  onLeaveSectionFocus = () => { },
   label = '',
   cssClasses = {}
 }: DropdownSectionProps): JSX.Element | null {

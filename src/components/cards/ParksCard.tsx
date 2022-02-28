@@ -111,10 +111,10 @@ export function ParksCard(props: ParksCardProps): JSX.Element {
 
   // TODO (cea2aj) Update this to render the ordinal once we get mocks from UX
   function renderOrdinal(index: number) {
-    // return (
-    //   <div className={cssClasses.ordinal}>{index}</div>
-    // );
-    return null;
+    return (
+      <div className="text-lg font-medium text-green-900 pr-1">{index}.</div>
+    );
+
   }
 
   function renderTitle(title: string) {
@@ -131,8 +131,7 @@ export function ParksCard(props: ParksCardProps): JSX.Element {
         )}
       </div>
       <div className={cssClasses.header}>
-        {configuration.showOrdinal &&
-          result.index &&
+        {result.index &&
           renderOrdinal(result.index)}
         {result.name && renderTitle(result.name)}
         <div className="ml-1 cursor-pointer">

@@ -49,7 +49,6 @@ export default function LocationsPage({ verticalKey }: {
   const { pageView } = useContext(PageViewContext);
   usePageSetupEffect(verticalKey);
 
-  const emptyResults: Result[] = [];
   const results = useAnswersState(state => state.vertical.results) || [];
   const allResultsForVertical = useAnswersState(state => state.vertical?.noResults?.allResultsForVertical.results) || [];
 
@@ -63,7 +62,7 @@ export default function LocationsPage({ verticalKey }: {
     const geoResults = resultsToDisplay.map(r => r.rawData as unknown as GeoData)
 
     return (
-      <div className="VerticalSearch-map">
+      <div className="VerticalSearch-map pb-7">
         <Mapbox
           markers={geoResults.map((r, i) => ({
             coord: [r.yextDisplayCoordinate?.longitude || 0, r.yextDisplayCoordinate?.latitude || 0],
