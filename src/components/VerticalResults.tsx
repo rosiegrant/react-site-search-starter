@@ -35,11 +35,15 @@ export function VerticalResultsDisplay(props: VerticalResultsDisplayProps): JSX.
     [cssClasses.results___loading ?? '']: isLoading
 
   });
-  if (results.length === 0) {
+
+  const noResults = useAnswersState(state => state.vertical?.noResults) || false;
+
+  if (noResults) {
     return (
-      <div className={resultsClassNames}>
-        No results :(
+      <div className="text-center m-10 text-xl font-bold">
+        No results
       </div>
+
     );
   }
 

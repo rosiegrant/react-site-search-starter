@@ -54,7 +54,8 @@ export default function LocationsPage({ verticalKey }: {
   const allResultsForVertical = useAnswersState(state => state.vertical?.noResults?.allResultsForVertical.results) || [];
 
   function renderMap(): JSX.Element | null {
-    if (results.length === 0 && allResultsForVertical.length === 0) return null;
+    //if (results.length === 0 && allResultsForVertical.length === 0) return null;
+    if (results.length === 0) return null;
 
     const resultsToDisplay = results.length === 0
       ? allResultsForVertical
@@ -125,9 +126,9 @@ export default function LocationsPage({ verticalKey }: {
             {pageView === PageView.FiltersHiddenMobile &&
               <ViewFiltersButton />}
           </div>
-          <AppliedFilters
+          {/* <AppliedFilters
             hiddenFields={['builtin.entityType']}
-          />
+          /> */}
           {/* <AlternativeVerticals
             currentVerticalLabel='Locations'
             verticalsConfig={[
