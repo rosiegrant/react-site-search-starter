@@ -130,7 +130,7 @@ export default function FilterSearch({
             const nearFilter = createNearMeFilter({
               lat: googLat,
               lng: googLong,
-              radius: 80467.2
+              radius: 160934
             })
             answersActions.setState({
               ...answersActions.state,
