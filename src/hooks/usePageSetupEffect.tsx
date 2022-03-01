@@ -30,6 +30,6 @@ export default function usePageSetupEffect(verticalKey?: string) {
       }
       executeSearch(answersActions, !!verticalKey);
     };
-    executeQuery();
+    //executeQuery();
   }, [answersActions, verticalKey]);
 }

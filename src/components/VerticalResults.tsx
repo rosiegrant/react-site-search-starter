@@ -91,6 +91,9 @@ export default function VerticalResults(props: VerticalResultsProps): JSX.Elemen
     resultsCount = allResultsCountForVertical;
   }
 
+  const answersActions = useAnswersActions();
+  answersActions.setVerticalLimit(10);
+
   return (
     <>
       <VerticalResultsDisplay results={results} isLoading={isLoading} {...otherProps} />
