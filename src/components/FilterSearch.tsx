@@ -132,6 +132,11 @@ export default function FilterSearch({
               lng: googLong,
               radius: 80467.2
             })
+
+            answersActions.setState({
+              ...answersActions.state,
+              filters: {}
+            });
             answersActions.setFilterOption({ ...nearFilter, selected: true });
             answersActions.executeVerticalQuery();
 
