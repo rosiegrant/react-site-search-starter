@@ -137,7 +137,7 @@ export default function InputDropdown({
       return React.cloneElement(child, {
         onLeaveSectionFocus,
         options: modifiedOptions,
-        isFocused: true,
+        isFocused: false,
         key: `${currentSectionIndex}-${childrenKey}`
       });
     }
@@ -205,12 +205,13 @@ export default function InputDropdown({
       && focusedSectionIndex === undefined
       && !onlyAllowDropdownOptionSubmissions
     ) {
-      console.log("hello")
-      if (firstOption) {
-        console.log(firstOption.value)
-        setLatestUserInput(firstOption.value);
-        onSubmit(firstOption.value);
-        firstOption.onSelect();
+      if (inputValue) {
+        //setLatestUserInput(inputValue);
+        //onSubmit(firstOption.value);
+        //firstOption.onSelect();
+
+        console.log(inputValue);
+        onSubmit(inputValue);
       }
       dispatch({ type: 'HideSections' });
     }
