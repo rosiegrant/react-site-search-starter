@@ -1,5 +1,5 @@
 import { ComponentType } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 interface RouteData {
   path: string,
@@ -24,7 +24,7 @@ export default function PageRouter({ Layout, routes }: PageProps) {
     if (Layout) {
       return (
         <Route key={path} path={path} exact={exact}>
-          <Layout page={page}/>
+          <Layout page={page} />
         </Route>
       );
     }
