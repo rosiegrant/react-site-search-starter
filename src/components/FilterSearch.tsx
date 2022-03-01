@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
-import { useAnswersActions, FilterSearchResponse, SearchParameterField, Filter } from '@yext/answers-headless-react';
+import { useAnswersActions, FilterSearchResponse, SearchParameterField, Filter, NearFilterValue, createNearMeFilter } from '@yext/answers-headless-react';
 import InputDropdown, { InputDropdownCssClasses } from "./InputDropdown";
 import DropdownSection, { DropdownSectionCssClasses, Option } from "./DropdownSection";
 import { processTranslation } from "./utils/processTranslation";
 import { useSynchronizedRequest } from "../hooks/useSynchronizedRequest";
 import renderAutocompleteResult, { AutocompleteResultCssClasses } from "./utils/renderAutocompleteResult";
 import { CompositionMethod, useComposedCssClasses } from "../hooks/useComposedCssClasses";
+import { Loader } from '@googlemaps/js-api-loader';
 
 const SCREENREADER_INSTRUCTIONS = 'When autocomplete results are available, use up and down arrows to review and enter to select.'
 
@@ -100,6 +101,56 @@ export default function FilterSearch({
     screenReaderText = screenReaderPhrases.join(' ');
   }
 
+
+
+
+
+  function onSubmit() {
+    console.log("submitting query")
+
+    const loader = new Loader({
+      apiKey: "AIzaSyAExrzRP6lmTEtrco-exBg2FT5Dxewb9kA"
+    });
+
+    loader
+      .load()
+      .then((google) => {
+        const geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ 'address': input }, function (results: { geometry: { location: any; }; }[], status: any) {
+          if (status == google.maps.GeocoderStatus.OK) {
+
+            if (results.length == 0) {
+              return; //no results
+
+            }
+            console.log(results[0])
+            var googLat = results[0]?.geometry?.location?.lat();
+            var googLong = results[0]?.geometry?.location?.lng();
+
+            const nearFilter = createNearMeFilter({
+              lat: googLat,
+              lng: googLong,
+              radius: 80467.2
+            })
+
+            answersActions.setState({
+              ...answersActions.state,
+              filters: {}
+            });
+            answersActions.setFilterOption({ ...nearFilter, selected: true });
+            answersActions.executeVerticalQuery();
+
+          }
+        });
+
+
+      })
+      .catch(e => {
+        console.log("hit a snag sry")
+        console.log(e);
+      });
+  }
+
   return (
     <div className={cssClasses.container}>
       <h1 className={cssClasses.label}>{label}</h1>
@@ -117,6 +168,7 @@ export default function FilterSearch({
         }}
         cssClasses={cssClasses}
         firstOption={sections[0]?.results[0]}
+        onSubmit={onSubmit}
       >
         {sections.map((section, sectionIndex) => {
           const sectionId = section.label ? `${section.label}-${sectionIndex}` : `${sectionIndex}`;

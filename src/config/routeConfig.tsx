@@ -3,8 +3,9 @@ import FAQsPage from '../pages/FAQsPage';
 import EventsPage from '../pages/EventsPage';
 import { universalResultsConfig } from './universalResultsConfig';
 import JobsPage from '../pages/JobsPage';
-import LocationsPage from '../pages/LocationsPage'; 
+import LocationsPage from '../pages/LocationsPage';
 import ParksPage from '../pages/ParksPage';
+import HomePage from '../pages/HomePage';
 
 export const routeConfig = [
   {
@@ -12,6 +13,10 @@ export const routeConfig = [
     exact: true,
     page: <ParksPage verticalKey='locations' />
 
+  },
+  {
+    path: '/homepage',
+    page: <HomePage />
   }
   // ,
   // {

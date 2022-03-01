@@ -77,8 +77,13 @@ export default function LocationsPage({ verticalKey }: {
 
 
   return (
-    <div className='flex'>
-      {/* <FilterDisplayManager>
+    <div>
+      <h1 className="text-xl tracking-tight font-bold text-gray-900">
+        <span className="block xl:inline">Search National Parks and Historic Sites</span>
+      </h1>
+      <div className='flex'>
+
+        {/* <FilterDisplayManager>
         <StaticFilters filterConfig={[
           {
             options: [
@@ -109,27 +114,27 @@ export default function LocationsPage({ verticalKey }: {
           }}
         />
       </FilterDisplayManager> */}
-      {(pageView === PageView.Desktop || pageView === PageView.FiltersHiddenMobile) &&
-        <div className='flex-grow'>
-          <FilterSearch
-            label=''
-            sectioned={false}
-            searchFields={filterSearchFields}
-            customCssClasses={{
-              container: 'md:w-100',
-              dropdownContainer: 'w-full absolute z-10 shadow-lg rounded-md border border-gray-300 bg-white pt-3 pb-1 mt-1'
-            }} />
-          <DirectAnswer />
-          <SpellCheck />
-          <div className='flex'>
-            <ResultsCount />
-            {pageView === PageView.FiltersHiddenMobile &&
-              <ViewFiltersButton />}
-          </div>
-          {/* <AppliedFilters
+        {(pageView === PageView.Desktop || pageView === PageView.FiltersHiddenMobile) &&
+          <div className='flex-grow'>
+            <FilterSearch
+              label=''
+              sectioned={false}
+              searchFields={filterSearchFields}
+              customCssClasses={{
+                container: 'md:w-100',
+                dropdownContainer: 'w-full absolute z-10 shadow-lg rounded-md border border-gray-300 bg-white pt-3 pb-1 mt-1'
+              }} />
+            <DirectAnswer />
+            <SpellCheck />
+            <div className='flex'>
+              <ResultsCount />
+              {pageView === PageView.FiltersHiddenMobile &&
+                <ViewFiltersButton />}
+            </div>
+            {/* <AppliedFilters
             hiddenFields={['builtin.entityType']}
           /> */}
-          {/* <AlternativeVerticals
+            {/* <AlternativeVerticals
             currentVerticalLabel='Locations'
             verticalsConfig={[
               { label: 'FAQs', verticalKey: 'faqs' },
@@ -137,14 +142,15 @@ export default function LocationsPage({ verticalKey }: {
               { label: 'Events', verticalKey: 'events' }
             ]}
           /> */}
-          {renderMap()}
-          <VerticalResults
-            CardComponent={ParksCard}
-            displayAllOnNoResults={false}
-          />
-          <LocationBias />
-        </div>
-      }
+            {renderMap()}
+            <VerticalResults
+              CardComponent={ParksCard}
+              displayAllOnNoResults={false}
+            />
+            <LocationBias />
+          </div>
+        }
+      </div>
     </div>
   )
 }

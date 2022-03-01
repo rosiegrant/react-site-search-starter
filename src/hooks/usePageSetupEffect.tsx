@@ -8,12 +8,11 @@ import { executeSearch, getSearchIntents, updateLocationIfNeeded } from "../util
  */
 export default function usePageSetupEffect(verticalKey?: string) {
   const answersActions = useAnswersActions();
-  answersActions.setVerticalLimit(10);
   useLayoutEffect(() => {
     const stateToClear = {
       filters: {},
       universal: {},
-      vertical: {}
+      vertical: { limit: 10 }
     }
     answersActions.setState({
       ...answersActions.state,
