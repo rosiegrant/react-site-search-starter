@@ -58,6 +58,7 @@ export default function StaticFilters(props: StaticFiltersProps): JSX.Element {
 
   return (
     <div className={cssClasses.container}>
+
       {filterConfig.map((filterSet, index) => {
         const isLastFilterSet = index === filterConfig.length - 1;
         return <fieldset key={`${index}-${filterSet.title}`}>

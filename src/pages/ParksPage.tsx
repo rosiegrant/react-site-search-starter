@@ -18,6 +18,7 @@ import { ParksCard } from '../components/cards/ParksCard';
 import Mapbox from '../components/Mapbox';
 import { useAnswersState } from '@yext/answers-headless-react';
 import { Result, Direction, SortType, VerticalResults as VR } from '@yext/answers-core';
+import Blog from '../components/Blog';
 
 const filterSearchFields = [
   //   {
@@ -50,12 +51,15 @@ export default function LocationsPage({ verticalKey }: {
   const { pageView } = useContext(PageViewContext);
   usePageSetupEffect(verticalKey);
 
+  // const query = useAnswersState(state => state.query.queryId) || null;
   const results = useAnswersState(state => state.vertical.results) || [];
+  const noResults = useAnswersState(state => state.vertical.noResults);
   const allResultsForVertical = useAnswersState(state => state.vertical?.noResults?.allResultsForVertical.results) || [];
+  const noGoogleResults = useAnswersState(state => state.meta.context) || "";
 
   function renderMap(): JSX.Element | null {
     //if (results.length === 0 && allResultsForVertical.length === 0) return null;
-    if (results.length === 0) return null;
+    if (results.length === 0 || noGoogleResults) return null;
 
     const resultsToDisplay = results.length === 0
       ? allResultsForVertical
@@ -79,7 +83,7 @@ export default function LocationsPage({ verticalKey }: {
   return (
     <div>
       <h1 className="text-xl tracking-tight font-bold text-gray-900">
-        <span className="block xl:inline">Search National Parks and Historic Sites</span>
+        <span className="text-3xl block xl:inline">Search National Parks and Historic Sites</span>
       </h1>
       <div className='flex'>
 
@@ -143,14 +147,22 @@ export default function LocationsPage({ verticalKey }: {
             ]}
           /> */}
             {renderMap()}
+            {!results.length && !allResultsForVertical.length && !noGoogleResults &&
+              < div >
+                <div className="VerticalSearch-map pb-7">
+                  <Mapbox />
+                  <Blog />
+                </div>
+              </div>
+            }
             <VerticalResults
               CardComponent={ParksCard}
               displayAllOnNoResults={false}
             />
-            <LocationBias />
+            {/* <LocationBias /> */}
           </div>
         }
       </div>
-    </div>
+    </div >
   )
 }
