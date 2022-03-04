@@ -37,8 +37,8 @@ export default function Mapbox(props: Props) {
             container: mapContainer.current || '',
             style: 'mapbox://styles/mapbox/streets-v11',
             interactive: false,
-            zoom: 9,
-            center: [95.7129, 37.0902]
+            zoom: 3,
+            center: [-95.7129, 37.0902]
         });
         map.current.setPadding({
             left: 50,
