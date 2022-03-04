@@ -120,14 +120,14 @@ export default function FilterSearch({
           if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
 
             //return; //no results
-            answersActions.setState({
-              ...answersActions.state,
-              meta: {
-                searchType: "vertical",
-                context: "No Google Results"
-              }
-            });
-            console.log(answersActions.state);
+            // answersActions.setState({
+            //   ...answersActions.state,
+            //   meta: {
+            //     searchType: "vertical",
+            //     context: "No Google Results"
+            //   }
+            // });
+
 
             return;
 
