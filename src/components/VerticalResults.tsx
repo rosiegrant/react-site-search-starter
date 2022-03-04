@@ -38,7 +38,8 @@ export function VerticalResultsDisplay(props: VerticalResultsDisplayProps): JSX.
 
   const noResults = useAnswersState(state => state.vertical?.noResults) || false;
 
-  if (noResults) {
+  const noGoogleResults = useAnswersState(state => state.meta.context) || "";
+  if (noResults || noGoogleResults) {
     return (
       <div className="text-center m-10 text-xl font-bold">
         No results
