@@ -117,12 +117,25 @@ export default function FilterSearch({
       .then((google) => {
         const geocoder = new google.maps.Geocoder();
         geocoder.geocode({ 'address': input }, function (results: { geometry: { location: any; }; }[], status: any) {
+          if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+
+            //return; //no results
+            answersActions.setState({
+              ...answersActions.state,
+              meta: {
+                searchType: "vertical",
+                context: "No Google Results"
+              }
+            });
+            console.log(answersActions.state);
+
+            return;
+
+          }
+
           if (status == google.maps.GeocoderStatus.OK) {
 
-            if (results.length == 0) {
-              return; //no results
 
-            }
             console.log(results[0])
             var googLat = results[0]?.geometry?.location?.lat();
             var googLong = results[0]?.geometry?.location?.lng();
